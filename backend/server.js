@@ -3,15 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import {notFound, errorHandler} from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 
 import userRoutes from "./routes/userRoutes.js";
 
-connectDB(); 
+connectDB();
 
-const app = express(); 
+const app = express();
 
 app.use("/api/users", userRoutes);
 
@@ -20,4 +20,4 @@ app.get("/", (req, res) => res.send("server is ready"));
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server started on port:${port}`));
+app.listen(port, () => console.log("\x1b[33m%s\x1b[0m", `Server started on port: ${port}`));
