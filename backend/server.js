@@ -10,7 +10,6 @@ const port = process.env.PORT || 3000;
 
 import userRoutes from "./routes/userRoutes.js";
 
-
 connectDB();
 
 const app = express();
@@ -26,4 +25,7 @@ app.get("/", (req, res) => res.send("server is ready"));
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => console.log("\x1b[1;31;47m%s\x1b[0m",`Server started on port: ${port}`));
+app.listen(port, () => console.log("\x1b[1;31;47m%s\x1b[0m", `Server started on port: ${port}`));
+
+
+//Remains User updated Only

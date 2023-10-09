@@ -44,25 +44,23 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-
-
 const logoutUser = asyncHandler(async (req, res) => {
-
-  res.cookie('jwt','',{
-    httpOnly: true,
-    expires: new Date(0),
-  })
-
+    res.cookie("jwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+    });
 
     res.status(200).json({message: " User loged User"});
 });
 
-
-
-
-
 const getUserProfile = asyncHandler(async (req, res) => {
-    res.status(200).json({message: "User profile"});
+    const user = {
+        _id: req.User._id,
+        name: req.User.name,
+        email: req.User.email,
+    };
+
+    res.status(200).json(user);
 });
 
 const updateUserProfile = asyncHandler(async (req, res) => {
