@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import {Form, Button, Row, Col } from "react-bootstrap";
+import {Form, Button, Row, Col} from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
 import React from "react";
 
-const RegisterScreen= () => {
+const RegisterScreen = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ const RegisterScreen= () => {
         <FormContainer>
             <h1>Sign Up</h1>
             <Form onSubmit={submitHandler}>
-            <Form.Group className="my-2" controlId="name">
+                <Form.Group className="my-2" controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type="text"
@@ -67,9 +67,9 @@ const RegisterScreen= () => {
                     Sign Up
                 </Button>
                 <Row className="py-3">
-                 <Col>
-                 Allready have an account ? <Link to='/login'>Login</Link>
-                 </Col>
+                    <Col>
+                        Allready have an account ? <Link to="/login">Login</Link>
+                    </Col>
                 </Row>
             </Form>
         </FormContainer>

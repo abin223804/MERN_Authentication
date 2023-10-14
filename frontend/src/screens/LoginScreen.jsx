@@ -1,9 +1,8 @@
+import React from "react";
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import {Form, Button, Row, Col } from "react-bootstrap";
+import {Form, Button, Row, Col} from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
-
-import React from "react";
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
@@ -43,9 +42,9 @@ const LoginScreen = () => {
                     Sign In
                 </Button>
                 <Row className="py-3">
-                 <Col>
-                 New Customer ? <Link to='/register'>Register</Link>
-                 </Col>
+                    <Col>
+                        New Customer ? <Link to="/register">Register</Link>
+                    </Col>
                 </Row>
             </Form>
         </FormContainer>
