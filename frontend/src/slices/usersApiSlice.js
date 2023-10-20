@@ -1,4 +1,4 @@
-import {apiSlice } from './apiSlice'
+import {apiSlice} from './apiSlice'
 
 const USERS_URL ='/api/users';
 
@@ -8,10 +8,10 @@ export const usersApiSlice=apiSlice.injectEndpoints({
             query:(data)=>({
                 url:`${USERS_URL}/auth`,
                 method:'POST',
-                body:data
-            })
-        })
-    })
-})
+                body:data,
+            }),
+        }),
+    }),
+});
 
-export const {useLoginMutation} =usersApiSlice ;
+export const {useLoginMutation} = usersApiSlice ;
