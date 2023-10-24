@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import FormContainer from "../components/FormContainer";
 import {useLoginMutation} from "../slices/usersApiSlice";
 import {setCredentials} from "../slices/authSlice";
+import {toast} from 'react-toastify'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if (userInfo) {
-            navigate('/');
+            navigate("/");
         }
     }, [navigate, userInfo]);
 
@@ -28,10 +29,10 @@ const LoginScreen = () => {
 
         try {
             const res = await login({email, password}).unwrap();
-            dispatch(setCredentials({...res}))
-            navigate('/');
+            dispatch(setCredentials({...res}));
+            navigate("/");
         } catch (err) {
-            console.log(err?.data?.message || err.error);
+            toast.error(err?.data?.message || err.error);
         }
     };
     return (
