@@ -6,9 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import FormContainer from "../components/FormContainer";
 import {useLoginMutation} from "../slices/usersApiSlice";
 import {setCredentials} from "../slices/authSlice";
-import {toast} from 'react-toastify'
+import {toast} from "react-toastify";
 
-const LoginScreen = () => {
+const LoginScreen = () => { 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -61,6 +61,7 @@ const LoginScreen = () => {
                         }}
                     ></Form.Control>
                 </Form.Group>
+                {isLoading && <h2>Loading...</h2>}
                 <Button type="submit" variant="primary" className="mt-3">
                     Sign In
                 </Button>
