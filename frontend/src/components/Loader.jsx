@@ -5,7 +5,7 @@ import React from 'react'
 const Loader = () => {
   return (
     <Spinner
-    animation='boarder'
+    animation='border'
     role='status'
     style={{
         width: '100px',
