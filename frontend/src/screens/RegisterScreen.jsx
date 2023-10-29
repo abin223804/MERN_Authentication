@@ -1,7 +1,12 @@
-import {useState} from "react";
-import {Link} from "react-router-dom";
+import {useState,useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link,useNavigate} from "react-router-dom";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
+import {setCredentials} from "../slices/authSlice";
+import {toast} from "react-toastify";
+import Loader from '../components/Loader'
+import { useRegisterMutation } from "../slices/usersApiSlice";
 
 import React from "react";
 
@@ -9,11 +14,36 @@ const RegisterScreen = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmpPssword, setConfirmPassword] = useState("");
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-        console.log("submit");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [register, {isLoading}] = useRegisterMutation();
+    const {userInfo} = useSelector((state) => state.auth);
+
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate("/");
+        }
+    }, [navigate, userInfo]);
+
+    const submitHandler =async (e) => {
+        e.preventDefault();
+       if(password!==confirmPassword)
+        {
+             toast.error('password must be same');
+        }else{
+            try {
+                const res = await register({name,email, password}).unwrap();
+            dispatch(setCredentials({...res}));
+            navigate("/");
+                
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        }
     };
     return (
         <FormContainer>
@@ -46,7 +76,7 @@ const RegisterScreen = () => {
                     <Form.Control
                         type="password"
                         placeholder="Enter Your Password"
-                        value={confirmpPssword}
+                        value={confirmPassword}
                         onChange={(e) => {
                             setConfirmPassword(e.target.value);
                         }}
@@ -63,6 +93,7 @@ const RegisterScreen = () => {
                         }}
                     ></Form.Control>
                 </Form.Group>
+                {isLoading && <Loader/>}
                 <Button type="submit" variant="primary" className="mt-3">
                     Sign Up
                 </Button>

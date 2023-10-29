@@ -13,6 +13,7 @@ const Loader = () => {
         margin:'auto',
         display: 'block',
     }}
+    variant="primary"
 
     ></Spinner>
   )
