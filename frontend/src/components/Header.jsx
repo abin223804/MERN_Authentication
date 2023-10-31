@@ -28,8 +28,8 @@ const Header = () => {
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
-                    <LinkContainer to="/">
-                        <Navbar.Brand>MERN Auth</Navbar.Brand>
+                    <LinkContainer to="/" >
+                        <Navbar.Brand className="text-danger">MERN Auth </Navbar.Brand>
                     </LinkContainer>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
