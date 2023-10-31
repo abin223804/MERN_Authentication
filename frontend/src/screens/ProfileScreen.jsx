@@ -1,12 +1,12 @@
-import {useState,useEffect} from "react";
+import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link,useNavigate} from "react-router-dom";
-import {Form, Button, } from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
+import {Form, Button} from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import {setCredentials} from "../slices/authSlice";
 import {toast} from "react-toastify";
-import Loader from '../components/Loader'
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import Loader from "../components/Loader";
+import {useUpdateUserMutation} from "../slices/usersApiSlice";
 
 import React from "react";
 
@@ -19,36 +19,33 @@ const ProfileScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-  
     const {userInfo} = useSelector((state) => state.auth);
-  const[updateProfile,{isLoading}]=useUpdateUserMutation();
-
+    const [updateProfile, {isLoading}] = useUpdateUserMutation();
 
     useEffect(() => {
-       setName(userInfo.name);
-       setEmail(userInfo.email);
+        setName(userInfo.name);
+        setEmail(userInfo.email);
     }, [userInfo.setName, userInfo.setEmail]);
 
-    const submitHandler =async (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-       if(password!==confirmPassword)
-        {
-             toast.error('password must be same');
-        }else{
-         try {
-            const res=await updateProfile({
-                _id:userInfo._id,
-                name,
-                email,
-                password
-            }).unwrap();
-            dispatch(setCredentials({...res}));
-            toast.success('profile updated successfully')
-         } catch (err) {
-            toast.error(err?.data?.message || err.error)
-         }
+        if (password !== confirmPassword) {
+            toast.error("password must be same");
+        } else {
+            try {
+                const res = await updateProfile({
+                    _id: userInfo._id,
+                    name,
+                    email,
+                    password,
+                }).unwrap();
+                dispatch(setCredentials({...res}));
+                toast.success("profile updated successfully");
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
         }
-    }; 
+    };
     return (
         <FormContainer>
             <h1>Update Profile</h1>
@@ -97,12 +94,11 @@ const ProfileScreen = () => {
                         }}
                     ></Form.Control>
                 </Form.Group>
-                {isLoading&&<Loader/>}
-          
+                {isLoading && <Loader />}
+
                 <Button type="submit" variant="primary" className="mt-3">
-                 Update
+                    Update
                 </Button>
-                
             </Form>
         </FormContainer>
     );
